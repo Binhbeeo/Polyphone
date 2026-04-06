@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PolyPhone - Hệ Thống Quản Lý Cửa Hàng Điện Thoại
 
 ## Giới thiệu
@@ -115,3 +116,7 @@ UPDATE Users SET mat_khau_hash='$2a$12$...' WHERE email='admin@polyphone.vn';
 - **Điểm tích lũy**: 1 điểm = 100đ khi đổi. Mỗi 1.000đ mua hàng = 1 điểm
 - **Voucher**: Hỗ trợ phần trăm và cố định, kiểm tra đơn tối thiểu
 - **BCrypt**: Tất cả mật khẩu được hash bằng BCrypt (salt rounds = 12)
+=======
+# Polyphone
+Don't Move
+>>>>>>> 9db4d6b4c721a4d033c224ca542abc6c2a9eab26
