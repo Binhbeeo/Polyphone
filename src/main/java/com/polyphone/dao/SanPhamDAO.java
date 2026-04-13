@@ -173,9 +173,31 @@ public class SanPhamDAO {
         } catch (SQLException e) { e.printStackTrace(); return false; }
     }
 
-    // Admin: Xóa (ẩn) sản phẩm (RQ49)
+    // Admin: Ẩn sản phẩm (RQ49)
     public boolean xoa(int sanPhamId) {
         String sql = "UPDATE SanPham SET dang_ban=0 WHERE sanpham_id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, sanPhamId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) { e.printStackTrace(); return false; }
+    }
+
+    // Admin: Xóa vĩnh viễn sản phẩm
+    public boolean xoaVinhVien(int sanPhamId) {
+        // Cần xóa ảnh trước vì có khóa ngoại
+        xoaAnh(sanPhamId);
+        String sql = "DELETE FROM SanPham WHERE sanpham_id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, sanPhamId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) { e.printStackTrace(); return false; }
+    }
+
+    // Admin: Hiện lại sản phẩm
+    public boolean hien(int sanPhamId) {
+        String sql = "UPDATE SanPham SET dang_ban=1 WHERE sanpham_id=?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, sanPhamId);

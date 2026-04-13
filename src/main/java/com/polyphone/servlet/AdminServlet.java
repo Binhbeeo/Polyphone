@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {
         "/admin/dashboard",
-        "/admin/products", "/admin/products/add", "/admin/products/edit", "/admin/products/delete",
+        "/admin/products", "/admin/products/add", "/admin/products/edit", "/admin/products/delete", "/admin/products/restore", "/admin/products/destroy",
         "/admin/categories", "/admin/categories/add", "/admin/categories/edit", "/admin/categories/delete",
         "/admin/users", "/admin/users/detail", "/admin/users/toggle",
         "/admin/users/blacklist", "/admin/users/points",
@@ -71,6 +71,8 @@ public class AdminServlet extends HttpServlet {
             case "/admin/products/add"         -> doAddProduct(req, resp);
             case "/admin/products/edit"        -> doEditProduct(req, resp);
             case "/admin/products/delete"      -> doDeleteProduct(req, resp);
+            case "/admin/products/restore"     -> doRestoreProduct(req, resp);
+            case "/admin/products/destroy"     -> doDestroyProduct(req, resp);
             case "/admin/categories/add"       -> doAddCategory(req, resp);
             case "/admin/categories/edit"      -> doEditCategory(req, resp);
             case "/admin/categories/delete"    -> doDeleteCategory(req, resp);
@@ -168,7 +170,17 @@ public class AdminServlet extends HttpServlet {
 
     private void doDeleteProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         spDAO.xoa(Integer.parseInt(req.getParameter("id")));
-        resp.sendRedirect(req.getContextPath() + "/admin/products?success=deleted");
+        resp.sendRedirect(req.getContextPath() + "/admin/products?success=hidden");
+    }
+
+    private void doRestoreProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        spDAO.hien(Integer.parseInt(req.getParameter("id")));
+        resp.sendRedirect(req.getContextPath() + "/admin/products?success=restored");
+    }
+
+    private void doDestroyProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        spDAO.xoaVinhVien(Integer.parseInt(req.getParameter("id")));
+        resp.sendRedirect(req.getContextPath() + "/admin/products?success=destroyed");
     }
 
     private SanPham buildSanPhamFromRequest(HttpServletRequest req) {

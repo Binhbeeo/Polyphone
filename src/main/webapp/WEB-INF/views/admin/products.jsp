@@ -16,7 +16,14 @@
     </a>
   </div>
   <c:if test="${not empty param.success}">
-    <div class="alert alert-success">Thao tác thành công!</div>
+    <div class="alert alert-success">
+        <c:choose>
+            <c:when test="${param.success == 'hidden'}">Sản phẩm đã được ẩn!</c:when>
+            <c:when test="${param.success == 'restored'}">Sản phẩm đã được hiển thị lại!</c:when>
+            <c:when test="${param.success == 'destroyed'}">Sản phẩm đã được xóa vĩnh viễn!</c:when>
+            <c:otherwise>Thao tác thành công!</c:otherwise>
+        </c:choose>
+    </div>
   </c:if>
   <div class="card border-0 shadow-sm">
     <div class="card-body p-0">
@@ -45,14 +52,31 @@
               <td class="text-danger fw-semibold"><fmt:formatNumber value="${sp.gia}" pattern="#,###"/>đ</td>
               <td><span class="${sp.tonKho == 0 ? 'text-danger' : (sp.tonKho < 5 ? 'text-warning' : 'text-success')} fw-semibold">${sp.tonKho}</span></td>
               <td><span class="badge ${sp.dangBan ? 'bg-success' : 'bg-secondary'}">${sp.dangBan ? 'Đang bán' : 'Ẩn'}</span></td>
-              <td>
-                <a href="${pageContext.request.contextPath}/admin/products/edit?id=${sp.sanPhamId}" class="btn btn-sm btn-outline-primary rounded-pill me-1"><i class="bi bi-pencil"></i></a>
-                <form method="post" action="${pageContext.request.contextPath}/admin/products/delete" class="d-inline"
-                      onsubmit="return confirm('Ẩn sản phẩm này?')">
-                  <input type="hidden" name="id" value="${sp.sanPhamId}">
-                  <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-eye-slash"></i></button>
-                </form>
-              </td>
+	              <td>
+	                <div class="d-flex">
+	                  <a href="${pageContext.request.contextPath}/admin/products/edit?id=${sp.sanPhamId}" class="btn btn-sm btn-outline-primary rounded-pill me-1" title="Sửa"><i class="bi bi-pencil"></i></a>
+	                  
+	                  <c:choose>
+	                    <c:when test="${sp.dangBan}">
+	                      <form method="post" action="${pageContext.request.contextPath}/admin/products/delete" class="d-inline" onsubmit="return confirm('Ẩn sản phẩm này?')">
+	                        <input type="hidden" name="id" value="${sp.sanPhamId}">
+	                        <button class="btn btn-sm btn-outline-secondary rounded-pill me-1" title="Ẩn"><i class="bi bi-eye-slash"></i></button>
+	                      </form>
+	                    </c:when>
+	                    <c:otherwise>
+	                      <form method="post" action="${pageContext.request.contextPath}/admin/products/restore" class="d-inline" onsubmit="return confirm('Hiện lại sản phẩm này?')">
+	                        <input type="hidden" name="id" value="${sp.sanPhamId}">
+	                        <button class="btn btn-sm btn-outline-success rounded-pill me-1" title="Hiện"><i class="bi bi-eye"></i></button>
+	                      </form>
+	                    </c:otherwise>
+	                  </c:choose>
+
+	                  <form method="post" action="${pageContext.request.contextPath}/admin/products/destroy" class="d-inline" onsubmit="return confirm('XÓA VĨNH VIỄN sản phẩm này? Thao tác này không thể hoàn tác!')">
+	                    <input type="hidden" name="id" value="${sp.sanPhamId}">
+	                    <button class="btn btn-sm btn-outline-danger rounded-pill" title="Xóa vĩnh viễn"><i class="bi bi-trash"></i></button>
+	                  </form>
+	                </div>
+	              </td>
             </tr>
           </c:forEach>
         </tbody>
