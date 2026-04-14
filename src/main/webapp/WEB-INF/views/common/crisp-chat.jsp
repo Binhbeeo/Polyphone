@@ -18,8 +18,6 @@
         <c:if test="${sessionScope.loggedInUser.role == 'admin' || sessionScope.loggedInUser.role == 'staff'}">
             // Thêm segment để phân biệt Admin/Staff trong Crisp Dashboard
             window.$crisp.push(["set", "session:segments", [["${sessionScope.loggedInUser.role}"] ]]);
-            // Tự động mở chat khi Admin/Staff vào trang quản trị (tùy chọn)
-            // window.$crisp.push(["do", "chat:open"]);
         </c:if>
     </c:if>
 </script>
