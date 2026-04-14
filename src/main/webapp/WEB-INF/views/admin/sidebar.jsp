@@ -1,7 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/common/crisp-chat.jsp"/>
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white sidebar" style="width:250px;min-height:100vh;">
+<style>
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+  }
+</style>
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white sidebar">
   <a href="${pageContext.request.contextPath}/admin/dashboard"
      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <i class="bi bi-phone-fill me-2 text-danger fs-4"></i>
