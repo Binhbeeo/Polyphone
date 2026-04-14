@@ -13,6 +13,7 @@
             height: 100%;
             margin: 0;
             background-color: #f4f7f6;
+            overflow: hidden;
         }
         .main-container {
             display: flex;
@@ -25,6 +26,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            overflow-y: auto;
         }
         .support-card {
             background: white;
@@ -99,27 +101,7 @@
                 <jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
             </c:when>
             <c:otherwise>
-                <div class="d-flex flex-column bg-dark text-white" style="width: 250px;">
-                    <div class="p-4">
-                        <span class="navbar-brand fw-bold fs-5"><i class="bi bi-phone-fill me-2 text-danger"></i>PolyPhone Staff</span>
-                    </div>
-                    <hr class="m-0 opacity-25">
-                    <ul class="nav nav-pills flex-column mb-auto p-3">
-                        <li class="nav-item mb-2">
-                            <a href="${pageContext.request.contextPath}/staff/orders" class="nav-link text-white py-2 px-3"><i class="bi bi-bag me-2"></i>Đơn hàng</a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a href="${pageContext.request.contextPath}/staff/complaints" class="nav-link text-white py-2 px-3"><i class="bi bi-chat-square-text me-2"></i>Khiếu nại</a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a href="${pageContext.request.contextPath}/staff/chat" class="nav-link active bg-danger py-2 px-3"><i class="bi bi-chat-dots me-2"></i>Hỗ trợ Chat</a>
-                        </li>
-                    </ul>
-                    <hr class="opacity-25">
-                    <div class="p-3">
-                        <a href="${pageContext.request.contextPath}/auth/logout" class="btn btn-outline-light btn-sm w-100 rounded-pill">Đăng xuất</a>
-                    </div>
-                </div>
+                <jsp:include page="/WEB-INF/views/staff/sidebar-staff.jsp"/>
             </c:otherwise>
         </c:choose>
 
