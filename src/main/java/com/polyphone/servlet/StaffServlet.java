@@ -12,7 +12,7 @@ import java.util.List;
 @WebServlet(urlPatterns = {
         "/staff/orders", "/staff/orders/detail", "/staff/orders/update-status",
         "/staff/complaints", "/staff/complaints/detail", "/staff/complaints/respond",
-        "/staff/profile"
+        "/staff/profile", "/staff/chat"
 })
 public class StaffServlet extends HttpServlet {
 
@@ -30,6 +30,7 @@ public class StaffServlet extends HttpServlet {
             case "/staff/complaints"        -> showComplaints(req, resp);
             case "/staff/complaints/detail" -> showComplaintDetail(req, resp);
             case "/staff/profile"           -> showProfile(req, resp);
+            case "/staff/chat"              -> req.getRequestDispatcher("/WEB-INF/views/common/chat-support.jsp").forward(req, resp);
             default -> resp.sendRedirect(req.getContextPath() + "/staff/orders");
         }
     }

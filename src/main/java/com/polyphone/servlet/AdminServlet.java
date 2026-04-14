@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet(urlPatterns = {
-        "/admin/dashboard",
+        "/admin/dashboard", "/admin/chat",
         "/admin/products", "/admin/products/add", "/admin/products/edit", "/admin/products/delete", "/admin/products/restore", "/admin/products/destroy",
         "/admin/categories", "/admin/categories/add", "/admin/categories/edit", "/admin/categories/delete",
         "/admin/users", "/admin/users/detail", "/admin/users/toggle",
@@ -42,6 +42,7 @@ public class AdminServlet extends HttpServlet {
         String path = req.getServletPath();
         switch (path) {
             case "/admin/dashboard"            -> showDashboard(req, resp);
+            case "/admin/chat"                 -> forward(req, resp, "common/chat-support.jsp");
             case "/admin/products"             -> showProducts(req, resp);
             case "/admin/products/add"         -> { loadProductForm(req); forward(req, resp, "admin/product-form.jsp"); }
             case "/admin/products/edit"        -> showEditProduct(req, resp);

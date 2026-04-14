@@ -13,6 +13,8 @@
   <div class="d-flex gap-2">
     <a href="${pageContext.request.contextPath}/staff/orders" class="btn btn-outline-light btn-sm">Đơn hàng</a>
     <a href="${pageContext.request.contextPath}/staff/complaints" class="btn btn-outline-light btn-sm">Khiếu nại</a>
+    <a href="${pageContext.request.contextPath}/staff/chat" class="btn btn-outline-light btn-sm">Hỗ trợ Chat</a>
+
     <a href="${pageContext.request.contextPath}/auth/logout" class="btn btn-danger btn-sm rounded-pill">Đăng xuất</a>
   </div>
 </nav>

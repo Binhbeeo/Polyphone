@@ -73,6 +73,12 @@
         <i class="bi bi-star me-2"></i>Đánh giá
       </a>
     </li>
+    <li class="nav-item mb-1">
+      <a href="${pageContext.request.contextPath}/admin/chat"
+         class="nav-link text-white ${pageContext.request.servletPath == '/admin/chat' ? 'active bg-danger' : ''}">
+        <i class="bi bi-chat-dots me-2"></i>Hỗ trợ Chat
+      </a>
+    </li>
   </ul>
     <a href="${pageContext.request.contextPath}/PolyPhone/home"
        class="text-white text-decoration-none small d-block mb-2">
